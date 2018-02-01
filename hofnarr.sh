@@ -9,7 +9,7 @@
 #
 #######
 
-SERVERLIST="/root/servers.txt"
+SERVERLIST="servers.txt"
 RCONPW="TurboHofnarri"
 TICKRATE=128
 MAP=de_dust2
