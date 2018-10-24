@@ -43,6 +43,7 @@ def startServers(servers):
         sname = s['name']
         ip = s['ip']
         token = getToken(sname)
+
         env = {
                 'TICKRATE': cs_cfg['tickrate'],
                 'GSLT': token,
@@ -55,22 +56,28 @@ def startServers(servers):
                 'RCONPW': cs_cfg['rcon_pw'],
                 'IP': ip
                 }
+
         vols = {
                 '/home/ponky/cs/matches': {
                     'bind': d_cfg['demovol'],
                     'mode': 'rw'
                     }
                 }
-        client.containers.run(
-                image='docknarr',
-                name=sname,
-                network_mode='host',
-                entrypoint=d_cfg['entrypoint'],
-                volumes=vols,
-                environment=env,
-                privileged=True,
-                detach=True
-                )
+
+        try:
+            client.containers.get(sname)
+            print("Container {} already running...".format(sname))
+        except:
+            client.containers.run(
+                    image='docknarr',
+                    name=sname,
+                    network_mode='host',
+                    entrypoint=d_cfg['entrypoint'],
+                    volumes=vols,
+                    environment=env,
+                    privileged=True,
+                    detach=True
+                    )
 
 def main():
     startServers(getServers())
