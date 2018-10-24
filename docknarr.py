@@ -57,7 +57,7 @@ def startServers(servers):
                 }
         vols = {
                 '/home/ponky/cs/matches': {
-                    'bind': '/home/cs/serverfiles/csgo/matches',
+                    'bind': d_cfg['demovol'],
                     'mode': 'rw'
                     }
                 }
