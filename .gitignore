@@ -1,0 +1,8 @@
+venv
+config.yml
+servers.txt
+test/
+__pycache__/
+lib/__pycache__/
+*.sw[a-p]
+*.py[cod]
