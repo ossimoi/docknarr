@@ -19,4 +19,4 @@ mv config.ini.example config.ini
 # Do necessary modifications in servers.txt and config.ini
 
 screen ./docknarr.py
-´´´
+```
