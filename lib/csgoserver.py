@@ -63,6 +63,3 @@ class CSGOServer:
 
     def destroy(self, force=False):
         return self.docker_client.containers.get(self.name).remove(v=False, force=force)
-
-    def _get_config(section):
-        return dict(self.config[section])
