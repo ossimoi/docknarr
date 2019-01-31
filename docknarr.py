@@ -26,6 +26,7 @@ def get_token(sname, steam_cfg):
             for token in v:
                 if 'memo' in token:
                     if token['memo'] == prefix + sname:
+                        token = token['login_token']
                         return token
     return api.create_game_server_accounts(730, prefix + sname)
 
