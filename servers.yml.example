@@ -1,0 +1,12 @@
+---
+servers:
+  -
+    name: cspro               # if count > 1, an incrementing number is
+                              # appended to the name
+    count: 2
+    ipaddr: 10.40.20.10       # if count > 1, servers' ip addresses are
+                              # assigned incrementally starting from this addr.
+  -
+    name: csbyoc
+    count: 16
+    ipaddr: 10.40.20.20
