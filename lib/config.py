@@ -23,7 +23,7 @@ def get_servers(client, server_cfg):
     for srv_def in srv_definitions:
         for i in range(srv_def['count']):
             name = srv_def['name'] if srv_def['count'] == 1 else srv_def['name'] + str(i+1)
-            ip = ip_address(srv_def['ip']) + i
+            ip = ip_address(srv_def['ipaddr']) + i
             gslt = _get_gslt(name, steam_cfg)
 
             s = csgo.CSGOServer(name, ip, gslt, config, client)
