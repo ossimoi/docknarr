@@ -6,17 +6,6 @@ from lib import webapi
 from lib import config
 from lib import csgoserver as csgo
 
-# def get_servers(client, steam_cfg):
-#     servers = []
-#     with open (steam_cfg['serverlist']) as f:
-#         content = f.readlines()
-#         for line in content:
-#             ip = line.split()[0]
-#             name = line.split()[1]
-#             s = csgo.CSGOServer(name, ip, get_token(name, steam_cfg), config.get_config(), client)
-#             servers.append(s)
-#     return servers
-
 def build_image(client, docker_cfg):
     try:
         client.images.get('docknarr')
