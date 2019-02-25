@@ -28,7 +28,7 @@ def get_servers(client, server_cfg):
 
             s = csgo.CSGOServer(name, ip, gslt, config, client)
             servers.append(s)
-    return s
+    return servers
 
 def _get_gslt(sname, steam_cfg):
     api = webapi.API(steam_cfg)
