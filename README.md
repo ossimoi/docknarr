@@ -13,10 +13,10 @@ cd docknarr
 virtualenv -p python3.6 venv
 source venv/bin/activate
 pip install -Ur requirements.txt
-mv servers.txt.example servers.txt
-mv config.ini.example config.ini
+mv servers.yml.example servers.yml
+mv config.yml.example config.yml
 
-# Do necessary modifications in servers.txt and config.ini
+# Do necessary modifications in servers.yml and config.yml
 
 screen ./docknarr.py
 ```

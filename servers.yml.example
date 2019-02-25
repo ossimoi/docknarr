@@ -1,15 +1,12 @@
+---
 servers:
   -
     name: cspro               # if count > 1, an incrementing number is
                               # appended to the name
     count: 2
-    ipaddr: 10.40.20.10
-    game_port: 27015
-    docker_image: csgo:latest
-    # cfg_dir: cfg/cspro/     # this dir gets copied to csgo server's root dir
+    ipaddr: 10.40.20.10       # if count > 1, servers' ip addresses are
+                              # assigned incrementally starting from this addr.
   -
     name: csbyoc
     count: 16
     ipaddr: 10.40.20.20
-    game_port: 27015
-    docker_image: csgo:latest

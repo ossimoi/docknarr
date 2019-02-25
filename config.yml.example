@@ -1,7 +1,7 @@
 steam:
     token: asdf
     token_prefix: ser_
-    serverlist: servers.txt
+    serverlist: servers.yml
 
 docker:
     entrypoint: /home/csgo/run.sh
