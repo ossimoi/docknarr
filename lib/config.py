@@ -4,6 +4,9 @@ import yaml
 from lib import csgoserver as csgo
 from lib import webapi
 
+class Config:
+    pass
+
 def get_config():
     with open("config.yml", 'r') as ymlfile:
         cfg = yaml.load(ymlfile)
@@ -23,10 +26,13 @@ def get_servers(client, server_cfg):
     for srv_def in srv_definitions:
         for i in range(srv_def['count']):
             name = srv_def['name'] if srv_def['count'] == 1 else srv_def['name'] + str(i+1)
+            image = srv_def['docker_image']
             ip = ip_address(srv_def['ipaddr']) + i
             gslt = _get_gslt(name, config['steam'])
+            cfgdir = srv_def['cfgdir']
 
-            s = csgo.CSGOServer(name, ip, gslt, config, client)
+
+            s = csgo.CSGOServer(name, image, ip, gslt, config, cfgdir, client)
             servers.append(s)
     return servers
 

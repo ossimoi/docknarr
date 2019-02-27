@@ -1,14 +1,20 @@
+from os import path
+
+from docker.errors import ImageNotFound
+
 from . import config
 from . import webapi
 
 class CSGOServer:
-    def __init__(self, name=None, ip=None, token=None, config=None,
-                 docker_client=None):
+    def __init__(self, name=None, image=None, ip=None, token=None, config=None,
+                 cfgdir=None, docker_client=None):
 
         self.name = name
+        self.image = image
         self.ip = ip
         self.token = token
         self.config = config
+        self.cfgdir = cfgdir
         self.docker_client = docker_client
 
         self.cs_cfg = self.config['cs']
@@ -41,7 +47,13 @@ class CSGOServer:
             self.run()
 
     def run(self):
-        c = self.docker_client.containers.run(image='docknarr',
+        try:
+            client.images.get(self.image)
+        except ImageNotFound:
+            print('Image {} not found, building...')
+            _build_image()
+
+        c = self.docker_client.containers.run(image=image,
                                          name=self.name,
                                          environment=self.env,
                                          volumes=self.vols,
@@ -63,3 +75,10 @@ class CSGOServer:
 
     def destroy(self, force=False):
         return self.docker_client.containers.get(self.name).remove(v=False, force=force)
+
+    def _build_image(self):
+        df = path.abspath(docker_cfg['dockerfile'])
+        df_path = path.dirname(df)
+        args = {'cfgdir': self.cfgdir}
+        docker_client.images.build(path=df_path, dockerfile=df, tag=self.image,
+                                   quiet=False)
