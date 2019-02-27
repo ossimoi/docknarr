@@ -21,7 +21,7 @@ RUN apt-get -y update \
 RUN curl http://media.steampowered.com/client/steamcmd_linux.tar.gz | tar -C $STEAMCMD -xvz \
     && $STEAMCMD/steamcmd.sh +login anonymous +force_install_dir $SERVER +app_update 740 validate +quit
 
-COPY cfg/$CFGDIR
+COPY cfg/$CFGDIR $SERVER/
 COPY cfg/run.sh $HOME/run.sh
 
 WORKDIR $SERVER

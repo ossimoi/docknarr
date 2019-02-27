@@ -48,12 +48,12 @@ class CSGOServer:
 
     def run(self):
         try:
-            client.images.get(self.image)
+            self.docker_client.images.get(self.image)
         except ImageNotFound:
-            print('Image {} not found, building...')
-            _build_image()
+            print('Image {} not found, building...'.format(self.image))
+            self._build_image()
 
-        c = self.docker_client.containers.run(image=image,
+        c = self.docker_client.containers.run(image=self.image,
                                          name=self.name,
                                          environment=self.env,
                                          volumes=self.vols,
@@ -77,8 +77,8 @@ class CSGOServer:
         return self.docker_client.containers.get(self.name).remove(v=False, force=force)
 
     def _build_image(self):
-        df = path.abspath(docker_cfg['dockerfile'])
+        df = path.abspath(self.docker_cfg['dockerfile'])
         df_path = path.dirname(df)
         args = {'cfgdir': self.cfgdir}
-        docker_client.images.build(path=df_path, dockerfile=df, tag=self.image,
+        self.docker_client.images.build(path=df_path, dockerfile=df, tag=self.image,
                                    quiet=False)
