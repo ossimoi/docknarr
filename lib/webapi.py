@@ -16,7 +16,6 @@ class API(WebAPI):
         call = self.IGameServersService.CreateAccount
         return [call(appid=appid, memo=memo)['response'] for i in range(count)]
 
-    # get_game_server_accounts
     def get_game_server_accounts(self, filter_regex=None):
         resp = self.IGameServersService.GetAccountList()['response']['servers']
         if filter_regex is None:

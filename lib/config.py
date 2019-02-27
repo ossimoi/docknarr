@@ -4,9 +4,6 @@ import yaml
 from lib import csgoserver as csgo
 from lib import webapi
 
-class Config:
-    pass
-
 def get_config():
     with open("config.yml", 'r') as ymlfile:
         cfg = yaml.load(ymlfile)
@@ -34,6 +31,7 @@ def get_servers(client, server_cfg):
 
             s = csgo.CSGOServer(name, image, ip, gslt, config, cfgdir, client)
             servers.append(s)
+
     return servers
 
 def _get_gslt(sname, steam_cfg):

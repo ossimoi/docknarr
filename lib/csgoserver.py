@@ -37,7 +37,7 @@ class CSGOServer:
             self.docker_cfg['demo_vol']: {
                 'bind': self.docker_cfg['demo_path'],
                 'mode': 'rw'
-                }
+            }
         }
 
     def start(self):
@@ -54,13 +54,13 @@ class CSGOServer:
             self._build_image()
 
         c = self.docker_client.containers.run(image=self.image,
-                                         name=self.name,
-                                         environment=self.env,
-                                         volumes=self.vols,
-                                         network_mode='host',
-                                         privileged=True,
-                                         detach=True
-                                        )
+                                              name=self.name,
+                                              environment=self.env,
+                                              volumes=self.vols,
+                                              network_mode='host',
+                                              privileged=True,
+                                              detach=True
+                                             )
         self.container_id = c.id
         return c
 
@@ -74,11 +74,13 @@ class CSGOServer:
             return 'notfound'
 
     def destroy(self, force=False):
-        return self.docker_client.containers.get(self.name).remove(v=False, force=force)
+        return self.docker_client.containers.get(self.name).remove(v=False,
+                                                                   force=force)
 
     def _build_image(self):
         df = path.abspath(self.docker_cfg['dockerfile'])
         df_path = path.dirname(df)
         args = {'cfgdir': self.cfgdir}
-        self.docker_client.images.build(path=df_path, dockerfile=df, tag=self.image,
-                                   quiet=False)
+
+        self.docker_client.images.build(path=df_path, dockerfile=df,
+                                        tag=self.image, quiet=False)
