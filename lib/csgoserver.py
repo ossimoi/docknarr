@@ -1,13 +1,14 @@
 from os import path
 
 from docker.errors import ImageNotFound
+from halo import Halo
 
 from . import config
 from . import webapi
 
 class CSGOServer:
-    def __init__(self, name=None, image=None, ip=None, token=None, config=None,
-                 cfgdir=None, docker_client=None):
+    def __init__(self, name=None, image=None, ip=None, token=None,
+                 cs_config=None, cfgdir=None, docker_client=None):
 
         self.name = name
         self.image = image
@@ -17,8 +18,7 @@ class CSGOServer:
         self.cfgdir = cfgdir
         self.docker_client = docker_client
 
-        self.cs_cfg = self.config['cs']
-        self.docker_cfg = self.config['docker']
+        self.cs_cfg = cs_config
 
         self.env = {
             'TICKRATE': self.cs_cfg['tickrate'],
@@ -34,8 +34,8 @@ class CSGOServer:
         }
 
         self.vols = {
-            self.docker_cfg['demo_vol']: {
-                'bind': self.docker_cfg['demo_path'],
+            self.cs_cfg['demo_volume']: {
+                'bind': self.cs_cfg['demo_path'],
                 'mode': 'rw'
             }
         }
@@ -47,12 +47,6 @@ class CSGOServer:
             self.run()
 
     def run(self):
-        try:
-            self.docker_client.images.get(self.image)
-        except ImageNotFound:
-            print('Image {} not found, building...'.format(self.image))
-            self._build_image()
-
         c = self.docker_client.containers.run(image=self.image,
                                               name=self.name,
                                               environment=self.env,
@@ -77,10 +71,19 @@ class CSGOServer:
         return self.docker_client.containers.get(self.name).remove(v=False,
                                                                    force=force)
 
-    def _build_image(self):
-        df = path.abspath(self.docker_cfg['dockerfile'])
+    def build_image(self):
+        df = path.abspath(self.cs_cfg['dockerfile'])
         df_path = path.dirname(df)
         args = {'cfgdir': self.cfgdir}
 
         self.docker_client.images.build(path=df_path, dockerfile=df,
                                         tag=self.image, quiet=False)
+
+    def image_exists(self):
+        try:
+            self.docker_client.images.get(self.image)
+        except ImageNotFound:
+            return False
+        else:
+            return True
+
