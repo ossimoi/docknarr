@@ -1,6 +1,7 @@
 from os import path
 
-from docker.errors import ImageNotFound
+from docker.errors import ImageNotFound, BuildError, APIError
+from halo import Halo
 
 from . import config
 from . import webapi
@@ -50,8 +51,15 @@ class CSGOServer:
         try:
             self.docker_client.images.get(self.image)
         except ImageNotFound:
-            print('Image {} not found, building...'.format(self.image))
-            self._build_image()
+            with Halo(text=f'Image {self.image} not found, building...',
+                      spinner='arc') as spin:
+                try:
+                    self._build_image()
+                except BuildError, APIError as e:
+                    spin.fail(text=f'Image {self.image} build failed!')
+                    print(e)
+                else:
+                    spin.succeed(text=f'Image {self.image} built!')
 
         c = self.docker_client.containers.run(image=self.image,
                                               name=self.name,
