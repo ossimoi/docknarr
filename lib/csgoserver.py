@@ -55,7 +55,7 @@ class CSGOServer:
                       spinner='arc') as spin:
                 try:
                     self._build_image()
-                except BuildError, APIError as e:
+                except BuildError as e:
                     spin.fail(text=f'Image {self.image} build failed!')
                     print(e)
                 else:
