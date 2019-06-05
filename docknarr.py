@@ -24,12 +24,12 @@ def _build_image(server):
 def main():
     ct = lambda: asctime(localtime())
 
-    with Halo(text='Initializing configuration...'):
+    with Halo(text='Initializing configuration...', spinner='arc'):
         steam_cfg = config.get_config()['steam']
         docker_cfg = config.get_config()['docker']
-    with Halo(text='Getting docker client...'):
+    with Halo(text='Getting docker client...', spinner='arc'):
         client = docker.from_env()
-    with Halo(text='Configuring servers...'):
+    with Halo(text='Configuring servers...', spinner='arc'):
         servers = config.get_servers(client, steam_cfg)
 
     while True:
