@@ -6,7 +6,12 @@ servers:
     count: 2
     ipaddr: 10.40.20.10       # if count > 1, servers' ip addresses are
                               # assigned incrementally starting from this addr.
+    cfgdir: cspro             # cfg/$cfgdir will be copied to the gameserver
+                              # root when building the docker image
+    docker_image: csgo-pro
   -
     name: csbyoc
     count: 16
     ipaddr: 10.40.20.20
+    cfgdir: csbyoc
+    docker_image: csgo-byoc
