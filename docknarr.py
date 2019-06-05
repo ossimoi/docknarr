@@ -36,12 +36,14 @@ def main():
     while True:
         time.sleep(2)
         for s in servers:
-            if not s.image_exists():
-                _build_image(s)
             if s.status() != 'running':
                 print(f'{ct()}  {s.name} crashed or not created, fixing...')
-                s.start()
-                print(f'{ct()}  {s.name} started...')
+                try:
+                    s.start()
+                except ImageNotFoundError:
+                    _build_image(s)
+                    s.start()
+                    print(f'{ct()}  {s.name} started...')
 
 if __name__ == "__main__":
     main()
