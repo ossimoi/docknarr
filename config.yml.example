@@ -5,8 +5,6 @@ steam:
 
 docker:
   entrypoint: /home/csgo/run.sh
-  mask: /24
-  gw: 10.0.0.254
   dockerfile: ./Dockerfile
   demo_vol: /path/to/demos
   demo_path: /home/cs/serverfiles/csgo/matches
