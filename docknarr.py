@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 import os
 import time
-import docker
+from docker import from_env
+from docker.errors import BuildError
 
 from time import localtime, asctime
 from lib import webapi
@@ -28,7 +29,7 @@ def main():
         steam_cfg = config.get_config()['steam']
         docker_cfg = config.get_config()['docker']
     with Halo(text='Getting docker client...', spinner='arc'):
-        client = docker.from_env()
+        client = from_env()
     with Halo(text='Configuring servers...', spinner='arc'):
         servers = config.get_servers(client, steam_cfg)
 
