@@ -9,6 +9,7 @@ servers:
     cfgdir: cspro             # cfg/$cfgdir will be copied to the gameserver
                               # root when building the docker image
     tickrate: 128
+    rcon_pw: ebinpw
     map: de_dust2
     mapgroup: mg_active
     maxplayers: 20
@@ -23,6 +24,7 @@ servers:
     count: 16
     ipaddr: 10.40.20.20
     cfgdir: csbyoc
+    rcon_pw: ebinpw
     tickrate: 128
     map: de_dust2
     mapgroup: mg_active
