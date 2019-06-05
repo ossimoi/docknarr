@@ -29,7 +29,7 @@ def get_servers(client, server_cfg):
             cfgdir = srv_def['cfgdir']
 
 
-            s = csgo.CSGOServer(name, image, ip, gslt, config, cfgdir, client)
+            s = csgo.CSGOServer(name, image, ip, gslt, srv_def, cfgdir, client)
             servers.append(s)
 
     return servers

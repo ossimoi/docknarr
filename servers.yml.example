@@ -8,10 +8,28 @@ servers:
                               # assigned incrementally starting from this addr.
     cfgdir: cspro             # cfg/$cfgdir will be copied to the gameserver
                               # root when building the docker image
+    tickrate: 128
+    map: de_dust2
+    mapgroup: mg_active
+    maxplayers: 20
+    gamemode: 1
+    gametype: 0
+    dockerfile: ./Dockerfile
     docker_image: csgo-pro
+    demo_volume: /volume/to/mount
+    demo_path: /path/to/demos
   -
     name: csbyoc
     count: 16
     ipaddr: 10.40.20.20
     cfgdir: csbyoc
+    tickrate: 128
+    map: de_dust2
+    mapgroup: mg_active
+    maxplayers: 12
+    gamemode: 1
+    gametype: 0
+    dockerfile: ./Dockerfile.byoc
     docker_image: csgo-byoc
+    demo_volume: /volume/to/mount
+    demo_path: /path/to/demos

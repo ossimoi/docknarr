@@ -27,7 +27,6 @@ def main():
 
     with Halo(text='Initializing configuration...', spinner='arc'):
         steam_cfg = config.get_config()['steam']
-        docker_cfg = config.get_config()['docker']
     with Halo(text='Getting docker client...', spinner='arc'):
         client = from_env()
     with Halo(text='Configuring servers...', spinner='arc'):

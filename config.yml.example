@@ -2,18 +2,3 @@ steam:
   token: asdf
   token_prefix: ser_
   serverlist: servers.yml
-
-docker:
-  entrypoint: /home/csgo/run.sh
-  dockerfile: ./Dockerfile
-  demo_vol: /path/to/demos
-  demo_path: /home/cs/serverfiles/csgo/matches
-
-cs:
-  rcon_pw: ebinpw
-  tickrate: 128
-  map: de_dust2
-  mapgroup: mg_active
-  maxplayers: 16
-  gamemode: 1
-  gametype: 0
