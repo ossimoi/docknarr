@@ -2,7 +2,7 @@
 import os
 import time
 from docker import from_env
-from docker.errors import BuildError
+from docker.errors import BuildError, ImageNotFound
 
 from time import localtime, asctime
 from lib import webapi
@@ -40,7 +40,7 @@ def main():
                 print(f'{ct()}  {s.name} crashed or not created, fixing...')
                 try:
                     s.start()
-                except ImageNotFoundError:
+                except ImageNotFound:
                     _build_image(s)
                     s.start()
                     print(f'{ct()}  {s.name} started...')
