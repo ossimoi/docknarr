@@ -39,10 +39,9 @@ def main():
                 print(f'{ct()}  {s.name} crashed or not created, fixing...')
                 try:
                     s.start()
+                    print(f'{ct()}  {s.name} started...')
                 except ImageNotFound:
                     _build_image(s)
-                    s.start()
-                    print(f'{ct()}  {s.name} started...')
 
 if __name__ == "__main__":
     main()
