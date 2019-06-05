@@ -1,6 +1,6 @@
 from os import path
 
-from docker.errors import ImageNotFound, BuildError, APIError
+from docker.errors import ImageNotFound
 from halo import Halo
 
 from . import config
