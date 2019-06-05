@@ -22,7 +22,7 @@ def main():
             if s.status() != 'running':
                 print(f'{ct()}  {s.name} crashed or not created, fixing...')
                 s.start()
-                print(f'{ct()}  {s.name} started...)
+                print(f'{ct()}  {s.name} started...')
 
 if __name__ == "__main__":
     main()
