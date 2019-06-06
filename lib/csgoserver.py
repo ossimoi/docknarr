@@ -74,10 +74,11 @@ class CSGOServer:
     def build_image(self):
         df = path.abspath(self.cs_cfg['dockerfile'])
         df_path = path.dirname(df)
-        args = {'cfgdir': self.cfgdir}
+        args = {'CFGDIR': self.cfgdir}
 
         self.docker_client.images.build(path=df_path, dockerfile=df,
-                                        tag=self.image, quiet=False)
+                                        tag=self.image, buildargs=args,
+                                        quiet=False)
 
     def image_exists(self):
         try:
@@ -86,4 +87,3 @@ class CSGOServer:
             return False
         else:
             return True
-
