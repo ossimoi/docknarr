@@ -13,7 +13,7 @@ greenlet==0.4.15
 halo==0.0.26
 idna==2.8
 log-symbols==0.0.13
-protobuf==3.6.1
+protobuf==3.18.3
 pycparser==2.19
 PyYAML==4.2b1
 requests==2.21.0
